@@ -1,1 +1,1 @@
-This is a project about low level programming
+This is a project about functions and nested loops
