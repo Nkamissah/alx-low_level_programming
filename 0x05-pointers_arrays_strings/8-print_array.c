@@ -9,21 +9,20 @@
  * puts_half - Prints half of a string.
  * @str: The string to be printed.
  */
-void puts_half(char *str)
+void print_array(int *a, int n)
 {
-	int index = 0, len = 0, n;
+	int i;
 
-	while (str[index++])
-		len++;
-
-	if ((len % 2) == 0)
-		n = len / 2;
-
-	else
-		n = (len + 1) / 2;
-
-	for (index = n; index < len; index++)
-		_putchar(str[index]);
-
-	_putchar('\n');
+	for (i = 0; i < n; i++)
+	{
+		if (i < n - 1)
+		{
+			printf("%d, ", a[i]);
+		}
+		else
+		{
+			printf("%d", a[i]);
+		}
+	}
+	putchar('\n');
 }
