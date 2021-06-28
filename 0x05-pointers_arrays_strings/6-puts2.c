@@ -1,17 +1,19 @@
 #include "holberton.h"
 
 /**
- * puts2 - prints a string
- * @str: value to be checked
- * Return: nothing
+ * puts2 - prints every other character of a  string to stdout
+ * @str: string to print
+ *
+ * Return: void
  */
 void puts2(char *str)
 {
-	while (*str != '\0')
+	int i = 0;
+
+	while (*(str + i))
 	{
-		_putchar(*str);
-		str++;
-		str++;
+		_putchar(*(str + i));
+		i = i + 2;
 	}
 	_putchar('\n');
 }
