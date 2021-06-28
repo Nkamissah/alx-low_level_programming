@@ -1,17 +1,23 @@
+/*
+ * File: 6-puts2.c
+ * Auth: Nicholas Amissah
+ */
+
 #include "holberton.h"
 
 /**
- * puts2 - prints a string
- * @str: value to be checked
- * Return: nothing
+ * puts2 - Prints one char out of two of a string.
+ * @str: The string containing characters.
  */
 void puts2(char *str)
 {
-	while (*str != '\0')
-	{
-		_putchar(*str);
-		str++;
-		str++;
-	}
+	int index = 0, len = 0;
+
+	while (str[index++])
+		len++;
+
+	for (index = 0; index < len; index += 2)
+		_putchar(str[index]);
+
 	_putchar('\n');
 }
