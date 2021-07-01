@@ -1,17 +1,11 @@
-/*
- * File: 0-strcat.c
- * Auth: Nicholas Amissah
- */
-
-#include "holberton.h"
-
 /**
- * strcat - Concatenates the string pointed to by @src, including the terminating
- *          null byte, to the end of the string pointed to by @dest.
- * @dest: A pointer to the string to be concatenated upon.
- * @src: The source string to be appended to @dest.
+ * _strcat - concatenates two strings
+ * @dest: pointer to the destination string
+ * @src: pointer to the source string
+ * Return: pointer to the resulting string dest
  */
- char *_strcat(char *dest, char *src)
+
+char *_strcat(char *dest, char *src)
 {
 	int i, j;
 
