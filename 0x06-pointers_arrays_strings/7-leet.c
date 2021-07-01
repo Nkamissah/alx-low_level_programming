@@ -1,26 +1,20 @@
 /**
- * rot13 - encodes a string by rotating the characters 13 spaces.
+ * leet - encodes a string into leetspeek.
  * @s: pointer to input string.
- * Return: Returns pointer encoded string.
+ * Return: Returns pointer to leetspeek string.
  */
-char *rot13(char *s)
+char *leet(char *s)
 {
 	int i, j;
-	char r[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
-	char alpha[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	char boolean;
+	char subs[] = "aAeEoOtTlL";
+	char le[] = "43071";
 
+	i = 0;
 	for (i = 0; s[i] != '\0'; i++)
 	{
-		boolean = 0;
-		for (j = 0; alpha[j] != '\0' && boolean == 0; j++)
-		{
-			if (s[i] == alpha[j])
-			{
-				s[i] = r[j];
-				boolean = 1;
-			}
-		}
+		for (j = 0; subs[j] != '\0'; j++)
+			if (s[i] == subs[j])
+				s[i] = le[j / 2];
 	}
 	return (s);
 }
