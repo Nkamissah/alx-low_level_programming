@@ -1,0 +1,1 @@
+This is a projet about static library
