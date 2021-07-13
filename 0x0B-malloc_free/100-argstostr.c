@@ -1,54 +1,85 @@
 #include "holberton.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 /**
-  * argstostr - convert the params passed to the program to string
-  * @ac: the argument count
-  * @av: the argument vector
-  *
-  * Return: ...
-  */
-char *argstostr(int ac, char **av)
+ * copychars - copies chars to buffer
+ * @b: destination buffer
+ * @start: starting char pointer
+ * @stop: ending char pointer
+ */
+void copychars(char *b, char *start, char *stop)
 {
-	int ch = 0, i = 0, j = 0, k = 0;
-	char *s;
+	while (start <= stop)
+		*b++ = *start++;
+	*b = 0;
+}
 
-	if (ac == 0 || av == NULL)
+/**
+ * wordcount - counts the number of words
+ * @str: the sentence string
+ *
+ * Return: int number of words
+ */
+int wordcount(char *str)
+{
+	int words = 0, in_word = 0;
+
+	while (1)
+	{
+		if (*str == ' ' || !*str)
+		{
+			if (in_word)
+				words++;
+			in_word = 0;
+			if (!*str)
+				break;
+		}
+		else
+			in_word++;
+		str++;
+	}
+	return (words);
+}
+
+/**
+ * strtow - splits sentence into words
+ * @str: the sentence string
+ *
+ * Return: pointer to string array
+ */
+char **strtow(char *str)
+{
+	int words = 0, in_word = 0;
+	char **ret, *word_start;
+
+	if (!str || !*str || !wordcount(str))
 		return (NULL);
-
-	while (i < ac)
+	ret = malloc(sizeof(char *) * (wordcount(str) + 1));
+	while (1)
 	{
-		while (av[i][j])
+		if (*str == ' ' || !*str)
 		{
-			ch++;
-			j++;
+			if (in_word)
+			{
+				ret[words] = malloc(sizeof(char) * (in_word + 1));
+				if (!ret[words])
+				{
+					return (NULL);
+				}
+				copychars(ret[words], word_start, str - 1);
+				words++;
+				in_word = 0;
+			}
+			if (!*str)
+				break;
 		}
-
-		j = 0;
-		i++;
-	}
-
-	s = malloc((sizeof(char) * ch) + ac + 1);
-
-	i = 0;
-	while (av[i])
-	{
-		while (av[i][j])
+		else
 		{
-			s[k] = av[i][j];
-			k++;
-			j++;
+			if (!in_word++)
+				word_start = str;
 		}
-
-		s[k] = '\n';
-
-		j = 0;
-		k++;
-		i++;
+		str++;
 	}
-
-	k++;
-	s[k] = '\0';
-	return (s);
+	ret[words] = 0;
+	return (ret);
 }
