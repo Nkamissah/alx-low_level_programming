@@ -1,52 +1,48 @@
 #include "holberton.h"
-#include <stdlib.h>
 
 /**
-  * string_nconcat - ...
-  * @s1: ...
-  * @s2: ...
-  * @n: ...
-  *
-  * Return: ...
-  */
+ * string_nconcat - concatenate two strings
+ * @s1: the first string
+ * @s2: the second string
+ * @n: the maximum number of bytes to use from s2
+ *
+ * Description: Copy s1 followed by the first n bytes of s2 into dynamically
+ * allocated memory, and append a terminating null-byte. If n is greater than
+ * or equal to the length of the string s2, use only the bytes from s2 up to
+ * it's terminating null-byte. Treat NULL as an an empty string.
+ *
+ * Return: If memory allocation fails, return NULL. Otherwise, return a pointer
+ * to the first character of the new string.
+ */
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	unsigned int i = 0, j = 0, k = 0, l = 0;
-	char *str;
+	char *cat;
+	unsigned int s1_len = 0;
+	unsigned int s2_len = 0;
 
-	if (s1 == NULL)
-		s1 = "";
-	if (s2 == NULL)
-		s2 = "";
+	if (s1 != NULL)
+	{
+		while (s1[s1_len])
+			++s1_len;
+	}
 
-	while (s1[i])
-		i++;
+	if (s2 != NULL)
+	{
+		while (s2_len < n && s2[s2_len])
+			++s2_len;
+	}
 
-	while (s2[k])
-		k++;
-
-	if (n >= k)
-		l = i + k;
-	else
-		l = i + n;
-
-	str = malloc(sizeof(char) * l + 1);
-	if (str == NULL)
+	cat = malloc(sizeof(char) * s1_len + s2_len + 1);
+	if (cat == NULL)
 		return (NULL);
 
-	k = 0;
-	while (j < l)
-	{
-		if (j <= i)
-			str[j] = s1[j];
+	for (n = 0; n < s1_len; ++n, ++cat)
+		*cat = s1[n];
 
-		if (j >= i)
-		{
-			str[j] = s2[k];
-			k++;
-		}
-		j++;
-	}
-	str[j] = '\0';
-	return (str);
+	for (n = 0; n < s2_len; ++n, ++cat)
+		*cat = s2[n];
+
+	*cat = '\0';
+
+	return (cat - s1_len - s2_len);
 }
